@@ -36,7 +36,7 @@ production-ready Django projects quickly.
 Features
 ---------
 
-* For Django 2.0
+* For Django 2.1
 * Works with Python 3.6
 * Renders Django projects with 100% starting test coverage
 * Twitter Bootstrap_ v4 (`maintained Foundation fork`_ also available)
@@ -89,7 +89,7 @@ Constraints
 -----------
 
 * Only maintained 3rd party libraries are used.
-* Uses PostgreSQL everywhere (9.2+)
+* Uses PostgreSQL everywhere (9.4 - 10.5)
 * Environment variables for configuration (This won't work with Apache/mod_wsgi).
 
 Support this Project!
@@ -172,13 +172,14 @@ Answer the prompts with your own desired options_. For example::
     1 - 10.5
     2 - 10.4
     3 - 10.3
-    4 - 10.2
-    5 - 10.1
-    6 - 9.6
-    7 - 9.5
+    4 - 10.4
+    5 - 10.3
+    6 - 10.2
+    7 - 10.1
+    8 - 9.6
+    9 - 9.5
     8 - 9.4
-    9 - 9.3
-    Choose from 1, 2, 3, 4 [1]: 1
+    Choose from 1, 2, 3, 4, 5, 6, 7, 8 [1]: 1
     Select js_task_runner:
     1 - None
     2 - Gulp
