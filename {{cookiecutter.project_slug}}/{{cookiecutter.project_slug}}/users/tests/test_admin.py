@@ -57,7 +57,7 @@ class TestUserAdmin:
         assert response.status_code == HTTPStatus.OK
 
     @pytest.fixture()
-    def force_allauth(self, settings):
+    def _force_allauth(self, settings):
         settings.DJANGO_ADMIN_FORCE_ALLAUTH = True
         # Reload the admin module to apply the setting change
         import {{ cookiecutter.project_slug }}.users.admin as users_admin
@@ -66,7 +66,7 @@ class TestUserAdmin:
             reload(users_admin)
 
     @pytest.mark.django_db()
-    @pytest.mark.usefixtures("force_allauth")
+    @pytest.mark.usefixtures("_force_allauth")
     def test_allauth_login(self, rf, settings):
         request = rf.get("/fake-url")
         request.user = AnonymousUser()
