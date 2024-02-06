@@ -1,3 +1,4 @@
+import contextlib
 from importlib import reload
 
 import pytest
@@ -60,10 +61,8 @@ class TestUserAdmin:
         # Reload the admin module to apply the setting change
         import {{ cookiecutter.project_slug }}.users.admin as users_admin
 
-        try:
+        with contextlib.suppress(admin.sites.AlreadyRegistered):
             reload(users_admin)
-        except admin.sites.AlreadyRegistered:
-            pass
 
     @pytest.mark.django_db()
     @pytest.mark.usefixtures("force_allauth")

@@ -5,10 +5,10 @@ import typing
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
-from django.http import HttpRequest
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
+    from django.http import HttpRequest
 
     from {{cookiecutter.project_slug}}.users.models import User
 
