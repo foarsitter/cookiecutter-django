@@ -1,3 +1,4 @@
+# ruff: noqa
 """
 With these settings, tests run faster.
 """
