@@ -10,9 +10,9 @@ jobs:
   include:
     - name: "Linter"
       before_script:
-        - pip install -q flake8
+        - pip install -q ruff
       script:
-        - "flake8"
+        - "ruff check ."
 
     - name: "Django Test"
     {%- if cookiecutter.use_docker == 'y' %}
