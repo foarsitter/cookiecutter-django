@@ -54,7 +54,7 @@ class TestUserAdmin:
         response = admin_client.get(url)
         assert response.status_code == 200
 
-    @pytest.fixture
+    @pytest.fixture()
     def force_allauth(self, settings):
         settings.DJANGO_ADMIN_FORCE_ALLAUTH = True
         # Reload the admin module to apply the setting change
@@ -65,7 +65,7 @@ class TestUserAdmin:
         except admin.sites.AlreadyRegistered:
             pass
 
-    @pytest.mark.django_db
+    @pytest.mark.django_db()
     @pytest.mark.usefixtures("force_allauth")
     def test_allauth_login(self, rf, settings):
         request = rf.get("/fake-url")

@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField{% if cookiecutter.username_type == "email" %}, EmailField{% endif %}
+from django.db.models import CharField
+{%- if cookiecutter.username_type == "email" %}
+from django.db.models import EmailField
+{%- endif %}
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 {%- if cookiecutter.username_type == "email" %}
