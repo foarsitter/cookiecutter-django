@@ -287,7 +287,7 @@ def test_travis_invokes_pytest(cookies, context, use_docker, expected_test_scrip
     with open(f"{result.project_path}/.travis.yml") as travis_yml:
         try:
             yml = yaml.safe_load(travis_yml)["jobs"]["include"]
-            assert yml[0]["script"] == ["flake8"]
+            assert yml[0]["script"] == ["ruff check ."]
             assert yml[1]["script"] == [expected_test_script]
         except yaml.YAMLError as e:
             pytest.fail(str(e))
