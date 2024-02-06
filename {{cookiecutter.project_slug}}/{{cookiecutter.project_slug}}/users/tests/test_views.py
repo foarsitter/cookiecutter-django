@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 import pytest
 from django.conf import settings
 from django.contrib import messages
@@ -101,7 +103,7 @@ class TestUserDetailView:
         response = user_detail_view(request, username=user.username)
         {%- endif %}
 
-        assert response.status_code == 200
+        assert response.status_code == HTTPStatus.OK
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
         request = rf.get("/fake-url/")
@@ -115,5 +117,5 @@ class TestUserDetailView:
         login_url = reverse(settings.LOGIN_URL)
 
         assert isinstance(response, HttpResponseRedirect)
-        assert response.status_code == 302
+        assert response.status_code == HTTPStatus.FOUND
         assert response.url == f"{login_url}?next=/fake-url/"
