@@ -85,15 +85,12 @@ exclude = [
     "*/migrations/*.py",
     "staticfiles/*"
 ]
-
 # Same as Django: https://github.com/cookiecutter/cookiecutter-django/issues/4792.
 line-length = 88
 indent-width = 4
-
 target-version = "py311"
 
 [tool.ruff.lint]
-
 select = [
   "F",
   "E",
@@ -150,17 +147,14 @@ select = [
   # "LOG",
   "RUF"
 ]
-
 ignore = [
   "S101", # Use of assert detected https://docs.astral.sh/ruff/rules/assert/
   "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102" # sometimes it's better to nest
 ]
-
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
-
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
