@@ -6,6 +6,11 @@ FROM docker.io/python as python-build-stage
 
 ARG BUILD_ENVIRONMENT=local
 
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
+
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
@@ -13,13 +18,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # psycopg2 dependencies
   libpq-dev
 
-# Requirements are installed here to ensure they will be cached.
-COPY ./requirements .
+RUN pip install poetry==1.7.1
 
-# Create Python Dependency and Sub-Dependency Wheels.
-RUN pip wheel --wheel-dir /usr/src/app/wheels  \
-  -r ${BUILD_ENVIRONMENT}.txt
+WORKDIR /app
 
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry install --no-root
 
 # Python 'run' stage
 FROM docker.io/python as python-run-stage
@@ -57,11 +62,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # All absolute dir copies ignore workdir instruction. All relative dir copies are wrt to the workdir instruction
 # copy python dependency wheels from python-build-stage
-COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
-# use wheels to install python dependencies
-RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
-  && rm -rf /wheels/
+COPY --from=python-build-stage ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
