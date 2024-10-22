@@ -27,6 +27,10 @@ RUN npm run build
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS python-build-stage
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
+ARG APP_HOME=/app
+
+WORKDIR ${APP_HOME}
+
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
