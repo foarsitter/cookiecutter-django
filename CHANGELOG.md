@@ -3,6 +3,149 @@ All enhancements and patches to Cookiecutter Django will be documented in this f
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 2024.10.21
+
+
+### Changed
+
+- Remove CELERY_BROKER_URL in favor of REDIS_URL ([#4861](https://github.com/cookiecutter/cookiecutter-django/pull/4861))
+
+### Fixed
+
+- Fix a number of issues with Azure storage ([#5476](https://github.com/cookiecutter/cookiecutter-django/pull/5476))
+
+### Updated
+
+- Update coverage to 7.6.4 ([#5480](https://github.com/cookiecutter/cookiecutter-django/pull/5480))
+
+## 2024.10.17
+
+
+### Updated
+
+- Update ruff to 0.7.0 ([#5474](https://github.com/cookiecutter/cookiecutter-django/pull/5474))
+
+- Update uvicorn to 0.32.0 ([#5471](https://github.com/cookiecutter/cookiecutter-django/pull/5471))
+
+- Update pillow to 11.0.0 ([#5470](https://github.com/cookiecutter/cookiecutter-django/pull/5470))
+
+- Update sentry-sdk to 2.17.0 ([#5473](https://github.com/cookiecutter/cookiecutter-django/pull/5473))
+
+## 2024.10.15
+
+
+### Changed
+
+- [pre-commit.ci] pre-commit autoupdate ([#5468](https://github.com/cookiecutter/cookiecutter-django/pull/5468))
+
+## 2024.10.14
+
+
+### Changed
+
+- Add requirements for ubuntu 24.04 ([#5467](https://github.com/cookiecutter/cookiecutter-django/pull/5467))
+
+### Updated
+
+- Update sphinx to 8.1.3 ([#5463](https://github.com/cookiecutter/cookiecutter-django/pull/5463))
+
+- Update coverage to 7.6.3 ([#5464](https://github.com/cookiecutter/cookiecutter-django/pull/5464))
+
+## 2024.10.12
+
+
+### Changed
+
+- Pin Python version to 3.12 ([#5456](https://github.com/cookiecutter/cookiecutter-django/pull/5456))
+
+### Updated
+
+- Update sphinx to 8.1.1 ([#5457](https://github.com/cookiecutter/cookiecutter-django/pull/5457))
+
+- Auto-update pre-commit hooks ([#5458](https://github.com/cookiecutter/cookiecutter-django/pull/5458))
+
+- Update django-cors-headers to 4.5.0 ([#5459](https://github.com/cookiecutter/cookiecutter-django/pull/5459))
+
+## 2024.10.11
+
+
+### Changed
+
+- Update README.md broken links ([#5454](https://github.com/cookiecutter/cookiecutter-django/pull/5454))
+
+- wait-for-it as dependency in the run stage ([#5452](https://github.com/cookiecutter/cookiecutter-django/pull/5452))
+
+### Updated
+
+- Auto-update pre-commit hooks ([#5450](https://github.com/cookiecutter/cookiecutter-django/pull/5450))
+
+## 2024.10.10
+
+
+### Updated
+
+- Update sentry-sdk to 2.16.0 ([#5444](https://github.com/cookiecutter/cookiecutter-django/pull/5444))
+
+- Bump traefik from 3.1.5 to 3.1.6 ([#5449](https://github.com/cookiecutter/cookiecutter-django/pull/5449))
+
+## 2024.10.09
+
+
+### Updated
+
+- Update coverage to 7.6.2 ([#5448](https://github.com/cookiecutter/cookiecutter-django/pull/5448))
+
+## 2024.10.08
+
+
+### Changed
+
+- [pre-commit.ci] pre-commit autoupdate ([#5441](https://github.com/cookiecutter/cookiecutter-django/pull/5441))
+
+### Updated
+
+- Update pre-commit to 4.0.1 ([#5445](https://github.com/cookiecutter/cookiecutter-django/pull/5445))
+
+- Bump amazon/aws-cli from 2.18.0 to 2.18.1 in /{{cookiecutter.project_slug}}/compose/production/aws ([#5443](https://github.com/cookiecutter/cookiecutter-django/pull/5443))
+
+- Auto-update pre-commit hooks ([#5442](https://github.com/cookiecutter/cookiecutter-django/pull/5442))
+
+## 2024.10.07
+
+
+### Documentation
+
+- Docs: fix Mailgun include in troubleshooting sections ([#5439](https://github.com/cookiecutter/cookiecutter-django/pull/5439))
+
+### Updated
+
+- Update sphinx to 8.0.2 ([#5263](https://github.com/cookiecutter/cookiecutter-django/pull/5263))
+
+- Update pre-commit to 4.0.0 ([#5432](https://github.com/cookiecutter/cookiecutter-django/pull/5432))
+
+- Auto-update pre-commit hooks ([#5433](https://github.com/cookiecutter/cookiecutter-django/pull/5433))
+
+- Update sphinx-rtd-theme to 3.0.0 ([#5437](https://github.com/cookiecutter/cookiecutter-django/pull/5437))
+
+- Bump amazon/aws-cli from 2.17.0 to 2.18.0 in /{{cookiecutter.project_slug}}/compose/production/aws ([#5436](https://github.com/cookiecutter/cookiecutter-django/pull/5436))
+
+## 2024.10.05
+
+
+### Changed
+
+- Replace pip with uv for the project files ([#5356](https://github.com/cookiecutter/cookiecutter-django/pull/5356))
+
+- Use wait-for-it in favor of the custom python script when waiting for postgres ([#5327](https://github.com/cookiecutter/cookiecutter-django/pull/5327))
+
+### Documentation
+
+- Spit docs into sections ([#5426](https://github.com/cookiecutter/cookiecutter-django/pull/5426))
+
+### Updated
+
+- Update crispy-bootstrap5 to 2024.10 ([#5430](https://github.com/cookiecutter/cookiecutter-django/pull/5430))
+
 ## 2024.10.04
 
 

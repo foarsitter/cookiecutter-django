@@ -5,6 +5,15 @@
 
 set -o errexit
 set -x
+set -e
+
+finish() {
+  # Your cleanup code here
+  docker compose -f docker-compose.local.yml down
+  docker volume rm my_awesome_project_my_awesome_project_local_postgres_data
+
+}
+trap finish EXIT
 
 # create a cache directory
 mkdir -p .cache/docker
@@ -33,7 +42,6 @@ docker compose -f docker-compose.local.yml run django python manage.py makemessa
 docker compose -f docker-compose.local.yml run \
   -e DJANGO_SECRET_KEY="$(openssl rand -base64 64)" \
   -e REDIS_URL=redis://redis:6379/0 \
-  -e CELERY_BROKER_URL=redis://redis:6379/0 \
   -e DJANGO_AWS_ACCESS_KEY_ID=x \
   -e DJANGO_AWS_SECRET_ACCESS_KEY=x \
   -e DJANGO_AWS_STORAGE_BUCKET_NAME=x \
@@ -45,6 +53,7 @@ docker compose -f docker-compose.local.yml run \
 # Generate the HTML for the documentation
 docker compose -f docker-compose.docs.yml run docs make html
 
+docker build -f ./compose/production/django/Dockerfile .
 # Run npm build script if package.json is present
 if [ -f "package.json" ]
 then

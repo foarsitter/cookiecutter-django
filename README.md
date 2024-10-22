@@ -84,11 +84,11 @@ and then editing the results to include your name, email, and various configurat
 
 First, get Cookiecutter. Trust me, it's awesome:
 
-    $ pip install "cookiecutter>=1.7.0"
+    $ uv tool install "cookiecutter>=1.7.0"
 
 Now run it against this repo:
 
-    $ cookiecutter https://github.com/cookiecutter/cookiecutter-django
+    $ uvx cookiecutter https://github.com/cookiecutter/cookiecutter-django
 
 You'll be prompted for some values. Provide them, then a Django project will be created for you.
 
@@ -190,8 +190,8 @@ Now take a look at your repo. Don't forget to carefully look at the generated RE
 
 For local development, see the following:
 
-- [Developing locally](http://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html)
-- [Developing locally using docker](http://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html)
+- [Developing locally](https://cookiecutter-django.readthedocs.io/en/latest/2-local-development/developing-locally.html)
+- [Developing locally using docker](https://cookiecutter-django.readthedocs.io/en/latest/2-local-development/developing-locally-docker.html)
 
 ## Community
 

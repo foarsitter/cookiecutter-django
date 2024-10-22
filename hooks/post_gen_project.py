@@ -91,12 +91,16 @@ def remove_docker_files():
             os.remove(os.path.join(".idea", "runConfigurations", file_name))
 
 
+def remove_nginx_docker_files():
+    shutil.rmtree(os.path.join("compose", "production", "nginx"))
+
+
 def remove_utility_files():
     shutil.rmtree("utility")
 
 
 def remove_heroku_files():
-    file_names = ["Procfile", "runtime.txt", "requirements.txt"]
+    file_names = ["Procfile", "runtime.txt"]
     for file_name in file_names:
         if file_name == "requirements.txt" and "{{ cookiecutter.ci_tool }}".lower() == "travis":
             # don't remove the file if we are using travisci but not using heroku
@@ -457,6 +461,8 @@ def main():
 
     if "{{ cookiecutter.use_docker }}".lower() == "y":
         remove_utility_files()
+        if "{{ cookiecutter.cloud_provider }}".lower() != "none":
+            remove_nginx_docker_files()
     else:
         remove_docker_files()
 
