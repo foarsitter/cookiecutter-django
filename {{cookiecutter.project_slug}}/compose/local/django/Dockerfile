@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
   build-essential \
   # psycopg dependencies
-  libpq-dev
+  libpq-dev \
+  gettext \
+  wait-for-it
 
 # Requirements are installed here to ensure they will be cached.
 RUN --mount=type=cache,target=/root/.cache/uv \
@@ -26,9 +28,6 @@ ADD . ${APP_HOME}
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync
 
-# Python 'run' stage
-FROM docker.io/python:3.12.7-slim-bookworm AS python-run-stage
-
 {% if cookiecutter.use_docker == "y" %}
 # devcontainer dependencies and utils
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -40,25 +39,6 @@ RUN groupadd --gid 1000 dev-user \
   && echo dev-user ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/dev-user \
   && chmod 0440 /etc/sudoers.d/dev-user
 {% endif %}
-
-# Install required system dependencies
-RUN apt-get update && apt-get install --no-install-recommends -y \
-  # psycopg dependencies
-  libpq-dev  \
-  wait-for-it \
-  # Translations dependencies
-  gettext \
-  # cleaning up unused files
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
-
-# All absolute dir copies ignore workdir instruction. All relative dir copies are wrt to the workdir instruction
-# copy python dependency wheels from python-build-stage
-COPY --from=python-build-stage --chown=app:app ${APP_HOME} ${APP_HOME}
-
-ARG APP_HOME=/app
-
-WORKDIR ${APP_HOME}
 
 ENV PATH="/${APP_HOME}/.venv/bin:$PATH"
 
