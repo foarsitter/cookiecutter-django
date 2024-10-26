@@ -9,7 +9,7 @@ set -e
 
 finish() {
   # Your cleanup code here
-  docker compose -f docker-compose.local.yml down
+  docker compose -f docker-compose.local.yml down --remove-orphans
   docker volume rm my_awesome_project_my_awesome_project_local_postgres_data
 
 }
@@ -18,6 +18,8 @@ trap finish EXIT
 # create a cache directory
 mkdir -p .cache/docker
 cd .cache/docker
+
+sudo rm -rf my_awesome_project
 
 # create the project using the default settings in cookiecutter.json
 uv run cookiecutter ../../ --no-input --overwrite-if-exists use_docker=y "$@"
@@ -28,6 +30,8 @@ docker compose -f docker-compose.local.yml build
 
 # run the project's type checks
 docker compose -f docker-compose.local.yml run django mypy my_awesome_project
+
+docker compose -f docker-compose.local.yml run --volume $PWD:/app django uv lock
 
 # run the project's tests
 docker compose -f docker-compose.local.yml run django pytest
