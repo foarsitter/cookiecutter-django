@@ -196,7 +196,7 @@ license = { text = "BSD" }
 authors = [
   { name = "Daniel Roy Greenfeld", email = "pydanny@gmail.com" },
 ]
-requires-python = ">=3.12"
+requires-python = "==3.12.*"
 dependencies = [
   "python-slugify==8.0.4",  # https://github.com/un33k/python-slugify
     "Pillow==10.4.0",  # https://github.com/python-pillow/Pillow
