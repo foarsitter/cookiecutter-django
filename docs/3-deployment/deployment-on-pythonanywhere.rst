@@ -28,16 +28,13 @@ Once you've been through this one-off config, future deployments are much simple
 Getting your code and dependencies installed on PythonAnywhere
 --------------------------------------------------------------
 
-Make sure your project is fully committed and pushed up to Bitbucket or Github or wherever it may be.  Then, log into your PythonAnywhere account, open up a **Bash** console, clone your repo, and create a virtualenv:
+Make sure your project is fully committed and pushed up to Bitbucket or Github or wherever it may be.  Then, log into your PythonAnywhere account, open up a **Bash** console, clone your repo, and install the project dependencies into a virtualenv:
 
 .. code-block:: bash
 
     git clone <my-repo-url>  # you can also use hg
     cd my-project-name
-    mkvirtualenv --python=/usr/bin/python3.10 my-project-name
-    pip install -r requirements/production.txt  # may take a few minutes
-
-.. note:: We're creating the virtualenv using Python 3.10 (``--python=/usr/bin/python3.10```), although Cookiecutter Django generates a project for Python 3.12. This is because, at time of writing, PythonAnywhere only supports Python 3.10. It shouldn't be a problem, but if is, you may try changing the Python version to 3.12 and see if it works. If it does, please let us know, or even better, submit a pull request to update this section.
+    uv sync --frozen --no-dev
 
 Setting environment variables in the console
 --------------------------------------------
@@ -56,7 +53,7 @@ Set environment variables via the virtualenv "postactivate" script (this will se
 
     vi $VIRTUAL_ENV/bin/postactivate
 
-.. note:: If you don't like vi, you can also edit this file via the PythonAnywhere "Files" menu; look in the ".virtualenvs" folder.
+.. note:: If you don't like vi, you can also edit this file via the PythonAnywhere "Files" menu; look in the ".venv" folder.
 
 Add these exports
 
@@ -100,19 +97,19 @@ Now go back to the *postactivate* script and set the ``DATABASE_URL`` environmen
     # or
     export DATABASE_URL='sqlite:////home/yourusername/path/to/db.sqlite'
 
-If you're using MySQL, you may need to run ``pip install mysqlclient``, and maybe add ``mysqlclient`` to *requirements/production.txt* too.
+If you're using MySQL, you may need to run ``uv add mysqlclient``.
 
 Now run the migration, and collectstatic:
 
 .. code-block:: bash
 
     source $VIRTUAL_ENV/bin/postactivate
-    python manage.py migrate
-    python manage.py collectstatic
+    uv run python manage.py migrate
+    uv run python manage.py collectstatic
     # if using django-compressor:
-    python manage.py compress
+    uv run python manage.py compress
     # and, optionally
-    python manage.py createsuperuser
+    uv run python manage.py createsuperuser
 
 
 Redis
@@ -126,11 +123,11 @@ We recommend to signup to a separate service offering hosted Redis (e.g. `Redisl
 Configure the PythonAnywhere Web Tab
 ------------------------------------
 
-Go to the PythonAnywhere **Web tab**, hit **Add new web app**, and choose **Manual Config**, and then the version of Python you used for your virtualenv.
+Go to the PythonAnywhere **Web tab**, hit **Add new web app**, and choose **Manual Config**, and choose the Python version from your project.
 
 .. note:: If you're using a custom domain (not on \*.pythonanywhere.com), then you'll need to set up a CNAME with your domain registrar.
 
-When you're redirected back to the web app config screen, set the **path to your virtualenv**.  If you used virtualenvwrapper as above, you can just enter its name.
+When you're redirected back to the web app config screen, set the **path to your virtualenv**, which should be the ``.venv`` folder in the root of your project.
 
 Click through to the **WSGI configuration file** link (near the top) and edit the wsgi file. Make it look something like this, repeating the environment variables you used earlier:
 
@@ -178,13 +175,13 @@ For subsequent deployments, the procedure is much simpler.  In a Bash console:
 
 .. code-block:: bash
 
-    workon my-virtualenv-name
     cd project-directory
     git pull
-    python manage.py migrate
-    python manage.py collectstatic
+    uv sync --frozen --no-dev
+    uv run python manage.py migrate
+    uv run python manage.py collectstatic
     # if using django-compressor:
-    python manage.py compress
+    uv run python manage.py compress
 
 And then go to the Web tab and hit **Reload**
 
