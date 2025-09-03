@@ -202,7 +202,7 @@ def remove_prettier_pre_commit():
 
 def remove_repo_from_pre_commit_config(repo_to_remove: str):
     pre_commit_config = Path(".pre-commit-config.yaml")
-    content = pre_commit_config.read_text().splitlines(keepends=True)
+    content = pre_commit_config.read_text().splitlines(keepends=False)
 
     removing = False
     new_lines = []
