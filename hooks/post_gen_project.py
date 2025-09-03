@@ -445,7 +445,6 @@ def main():  # noqa: C901, PLR0912, PLR0915
 
     if "{{ cookiecutter.use_heroku }}".lower() == "n":
         remove_heroku_files()
-        remove_repo_from_pre_commit_config("uv-pre-commit")
 
     if "{{ cookiecutter.use_docker }}".lower() == "n" and "{{ cookiecutter.use_heroku }}".lower() == "n":
         if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
